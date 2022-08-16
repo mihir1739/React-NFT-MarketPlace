@@ -3,6 +3,7 @@ To run the above project on your machine
 2. open terminal on vscode on the same project.
 3. Type "npm install". 
 4. Then type "npm start".
+5. It will get opened on your browser in a while. 
 
 # Getting Started with Create React App
 
