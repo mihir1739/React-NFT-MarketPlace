@@ -14,8 +14,20 @@ const NAV__LINKS = [
     url: "/market",
   },
   {
+    display: "Auction",
+    url: "/auction",
+  },
+  {
     display: "Create",
     url: "/create",
+  },
+  {
+    display: "Storage",
+    url: "/storage",
+  },
+  {
+    display: "T&C",
+    url: "/terms",
   },
   {
     display: "Contact",
@@ -31,10 +43,11 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
+        document.body.scrollTop > 90 ||
+        document.documentElement.scrollTop > 90
       ) {
         headerRef.current.classList.add("header__shrink");
+      
       } else {
         headerRef.current.classList.remove("header__shrink");
       }

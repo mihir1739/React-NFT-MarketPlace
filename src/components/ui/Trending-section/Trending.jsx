@@ -12,7 +12,7 @@ const Trending = () => {
       <Container>
         <Row>
           <Col lg="12" className="mb-5">
-            <h3 className="trending__title">Trending</h3>
+            <h3 className="trending__title">For Sale</h3>
           </Col>
 
           {NFT__DATA.slice(0, 8).map((item) => (

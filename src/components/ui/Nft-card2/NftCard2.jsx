@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./nft-card.css";
+import "./nft-card2.css";
 
-import Modal from "../Modal/Modal";
+import Modal2 from "../Modal2/Modal2";
 
-const NftCard = (props) => {
+const NftCard2 = (props) => {
   const { title, id, currentBid, creatorImg, imgUrl, creator } = props.item;
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
   return (
     <div className="single__nft__card">
@@ -18,7 +18,7 @@ const NftCard = (props) => {
 
       <div className="nft__content">
         <h5 className="nft__title">
-          <Link to={`/market/auction/${id}`}>{title}</Link>
+          <Link to={`/auction/${id}`}>{title}</Link>
         </h5>
 
         <div className="creator__info-wrapper d-flex gap-3">
@@ -33,7 +33,7 @@ const NftCard = (props) => {
             </div>
 
             <div>
-              <h6>Current </h6>
+              <h6>Current bid </h6>
               <p>{currentBid} NEAR</p>
             </div>
           </div>
@@ -42,15 +42,15 @@ const NftCard = (props) => {
         <div className=" mt-3 d-flex align-items-center justify-content-between">
           <button
             className="bid__btn d-flex align-items-center gap-1"
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowModal2(true)}
           >
-            <i class="ri-shopping-bag-line"></i> BUY NOW
+            <i class="ri-shopping-bag-line"></i> Bid Now
           </button>
 
-          {showModal && <Modal setShowModal={setShowModal} />}
+          {showModal2 && <Modal2 setShowModal2={setShowModal2} />}
 
           <span className="history__link">
-            {/* <Link to="#">View History</Link> */}
+            <Link to="#">View History</Link>
           </span>
         </div>
       </div>
@@ -58,4 +58,4 @@ const NftCard = (props) => {
   );
 };
 
-export default NftCard;
+export default NftCard2;

@@ -19,7 +19,7 @@ const MY__ACCOUNT = [
     url: "/market",
   },
   {
-    display: "Edit Profile",
+    display: "My Wallet",
     url: "/wallet",
   },
 ];
@@ -53,8 +53,8 @@ const COMPANY = [
     url: "/home",
   },
   {
-    display: "Ranking",
-    url: "/market",
+    display: "T&C",
+    url: "/terms",
   },
   {
     display: "Contact Us",

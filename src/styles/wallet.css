@@ -19,15 +19,15 @@
 }
 
 .wallet__item span i {
-  font-size: 2.5rem;
+  font-size: 2.6rem;
 }
 
 .wallet__item h5 {
   color: #fff;
-  margin-top: 15px;
+  margin-top: 18px;
 }
 
 .wallet__item p {
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 28px;
 }

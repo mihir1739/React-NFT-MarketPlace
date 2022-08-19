@@ -6,29 +6,29 @@ import { Container, Row, Col } from "reactstrap";
 import "../styles/wallet.css";
 
 const wallet__data = [
-  {
-    title: "Near Wallet",
-    desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
-    icon: "ri-bit-coin-line",
-  },
+  // {
+  //   title: "Near Wallet",
+  //   desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
+  //   icon: "ri-bit-coin-line",
+  // },
+
+  // {
+  //   title: "Near Wallet",
+  //   desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
+  //   icon: "ri-coin-line",
+  // },
 
   {
-    title: "Metamask",
+    title: "Near Wallet",
     desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
     icon: "ri-coin-line",
   },
 
-  {
-    title: "Uniswap",
-    desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
-    icon: "ri-money-cny-circle-line",
-  },
-
-  {
-    title: "CoinBase",
-    desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
-    icon: "ri-bit-coin-line",
-  },
+  // {
+  //   title: "CoinBase",
+  //   desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
+  //   icon: "ri-bit-coin-line",
+  // },
 ];
 
 const Wallet = () => {
@@ -42,15 +42,15 @@ const Wallet = () => {
               <div className="w-50 m-auto">
                 <h3 className="text-light">Connect your wallet</h3>
                 <p>
-                  Ignitus suggest's you the best wallets in the market.
+                  Ignitus suggest's you the best crypto wallets in the market. 
                   Wallets provides best security to all your assets and also allows you 
-                  to store safe with a keys!
+                  to store you NFTs or Tokens safe with a keys!
                 </p>
               </div>
             </Col>
 
             {wallet__data.map((item, index) => (
-              <Col lg="3" md="4" sm="6" key={index} className="mb-4">
+              <Col lg="12" md="6" sm="4" key={index} className="mb-6">
                 <div className="wallet__item">
                   <span>
                     <i class={item.icon}></i>
