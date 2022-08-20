@@ -43,8 +43,8 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (
-        document.body.scrollTop > 90 ||
-        document.documentElement.scrollTop > 90
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
       ) {
         headerRef.current.classList.add("header__shrink");
       
