@@ -30,6 +30,10 @@ const NAV__LINKS = [
     url: "/terms",
   },
   {
+    display: "MyToken",
+    url: "/mytokens",
+  },
+  {
     display: "Contact",
     url: "/contact",
   },
@@ -93,7 +97,7 @@ const Header = () => {
           <div className="nav__right d-flex align-items-center gap-5 ">
             <button className="btn d-flex gap-2 align-items-center">
               <span>
-                <i class="ri-wallet-line"></i>
+                <i class="ri-wallet-line"> </i>
               </span>
               <Link to="/wallet">Connect Wallet</Link>
             </button>

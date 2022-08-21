@@ -1,7 +1,7 @@
 .header {
   width: 100%;
-  height: 70px;
-  line-height: 70px;
+  height: 80px;
+  line-height: 90px;
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
 
 .header__shrink {
   background: #14141f;
-  box-shadow: 2px 2px 4px -2px #e250e5;
+  box-shadow: 2px 2px 5px -2px #e250e5;
 }
 
 .navigation {
@@ -22,10 +22,9 @@
 .nav__list {
   display: flex;
   align-items: center;
-  column-gap: 2.7rem;
+  column-gap: 2.8rem;
   margin-bottom: 0;
 }
-
 .nav__item a {
   text-decoration: none;
   color: #fff;
@@ -55,6 +54,7 @@
 }
 
 .nav__right .btn a {
+  column-gap: 2rem;
   color: #fff;
   text-decoration: none;
   font-size: 0.8rem;

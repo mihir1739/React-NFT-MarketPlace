@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 
-import NftCard from "../components/ui/Nft-card2/NftCard2";
+import NftCard2 from "../components/ui/Nft-card2/NftCard2";
 
 import { NFT__DATA } from "../assets/data/data";
 
@@ -87,7 +87,7 @@ const Auction = () => {
 
             {data?.map((item) => (
               <Col lg="3" md="4" sm="6" className="mb-4" key={item.id}>
-                <NftCard item={item} />
+                <NftCard2 item={item} />
               </Col>
             ))}
           </Row>

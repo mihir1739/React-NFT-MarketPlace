@@ -1,0 +1,29 @@
+.place__bid-btn {
+    padding: 7px 25px;
+    border: none;
+    outline: none;
+    width: 120px;
+    margin: auto;
+    background: #5142fc;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 15px;
+  }
+
+  .input__item input {
+    width: 100%;
+    border: 1px solid rgba(221, 221, 221, 0.274);
+    background: transparent;
+    color: #fff;
+    padding: 9px 25px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 0.8rem;
+  }
+  
+  .input__item h6 {
+    font-size: 0.9rem;
+    color: #fff;
+  }
