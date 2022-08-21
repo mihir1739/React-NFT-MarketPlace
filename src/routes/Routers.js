@@ -28,6 +28,8 @@ const Routers = () => {
       <Route path="/mytokens" element={<MyTokens />} />
       <Route path="/wallet" element={<Wallet />} />
       <Route path="/market/:id" element={<NftDetails />} />
+      <Route path="/auction/:id" element={<NftDetails />} />
+
     </Routes>
   );
 };
