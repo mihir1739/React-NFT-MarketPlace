@@ -17,9 +17,13 @@
     "remixicon": "^2.5.0",
     "web-vitals": "^1.1.2"
   },
+<<<<<<< HEAD
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+=======
+ "scripts": {
+>>>>>>> ff7255cec4b4c7b550417381cb5208f1fcee131f
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
