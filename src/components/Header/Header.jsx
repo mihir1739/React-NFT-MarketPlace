@@ -1,6 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import "./header.css";
 import { Container } from "reactstrap";
+// import Nav from 'react-bootstrap/Nav';
+// import { Link } from 'react-router-dom';
+// import { HashLink } from 'react-router-hash-link';
 
 import { NavLink, Link } from "react-router-dom";
 
@@ -30,13 +33,13 @@ const NAV__LINKS = [
     url: "/terms",
   },
   {
-    display: "MyToken",
+    display: "Tokens",
     url: "/mytokens",
   },
-  {
-    display: "Contact",
-    url: "/contact",
-  },
+  // {
+  //   display: "Contact",
+  //   url: "/contact",
+  // },
 ];
 
 const Header = () => {

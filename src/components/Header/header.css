@@ -1,11 +1,12 @@
 .header {
+  display: flex !important;
   width: 100%;
   height: 80px;
   line-height: 90px;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 111111;
+  z-index: 500 !important;
 }
 
 .header__shrink {
@@ -49,8 +50,14 @@
 
 .nav__right .btn {
   padding: 7px 25px;
-  border: 1px solid #2daccc;
+  border: 2px solid #2daccc;
   border-radius: 50px;
+  padding: 7px 12px;
+  /* padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: middle;
+  margin: 0.8rem 0; */
 }
 
 .nav__right .btn a {
@@ -111,5 +118,9 @@
 
   .btn a {
     font-size: 0.7rem !important;
+  }
+
+  .topNav {
+    padding: 5px 0px 8px 0px;
   }
 }
