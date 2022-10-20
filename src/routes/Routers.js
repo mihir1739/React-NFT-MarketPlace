@@ -14,21 +14,24 @@ import MyTokens from "../pages/MyTokens";
 import Wallet from "../pages/Wallet";
 import NftDetails from "../pages/NftDetails";
 
-const Routers = () => {
+const Routers = (props) => {
+
+  const {mainObject} = props;
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/market" element={<Market />} />
-      <Route path="/auction" element={<Auction />} />
-      <Route path="/create" element={<Create />} />
-      <Route path="/storage" element={<Storage />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/mytokens" element={<MyTokens />} />
-      <Route path="/wallet" element={<Wallet />} />
-      <Route path="/market/:id" element={<NftDetails />} />
-      <Route path="/auction/:id" element={<NftDetails />} />
+      <Route path="/home" element={<Home mainObject={mainObject}/>} />
+      <Route path="/market" element={<Market mainObject={mainObject}/>} />
+      <Route path="/auction" element={<Auction mainObject={mainObject}/>} />
+      <Route path="/create" element={<Create mainObject={mainObject}/>} />
+      <Route path="/storage" element={<Storage mainObject={mainObject}/>} />
+      <Route path="/terms" element={<Terms mainObject={mainObject}/>} />
+      <Route path="/contact" element={<Contact mainObject={mainObject}/>} />
+      <Route path="/mytokens" element={<MyTokens mainObject={mainObject}/>} />
+      <Route path="/wallet" element={<Wallet mainObject={mainObject}/>} />
+      <Route path="/market/:nftContract/:tokenId" element={<NftDetails mainObject={mainObject}/>} />
+      <Route path="/auction/:nftContract/:tokenId" element={<NftDetails mainObject={mainObject}/>} />
 
     </Routes>
   );

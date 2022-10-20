@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 
 import NftCard from "../components/ui/Nft-card/NftCard";
 
-import { NFT__DATA } from "../assets/data/data";
+import {getSales} from "../helper_functions/salehandler"
 
 import { Container, Row, Col } from "reactstrap";
 
 import "../styles/market.css";
 
-const Market = () => {
-  const [data, setData] = useState(NFT__DATA);
+const Market = (props) => {
 
-  const handleCategory = () => {};
+  const {wallet, marketplaceContract, accountId} = props.mainObject;
 
-  const handleItems = () => {};
+  const [sales, setSales] = useState([]);
+  const [tokens, setTokens] = useState([]);
+
+  useEffect( ()=>{
+    async function fetchObject(){
+      const object = await getSales(wallet, marketplaceContract);
+      setSales(object.sales);
+      setTokens(object.tokens);
+    }
+    fetchObject()
+  },[]);  
 
   // ====== SORTING DATA BY HIGH, MID, LOW RATE =========
   const handleSort = (e) => {
+    // Something that can be done later
+    /*
     const filterValue = e.target.value;
 
     if (filterValue === "high") {
@@ -42,6 +54,7 @@ const Market = () => {
 
       setData(filterData);
     }
+    */
   };
 
   return (
@@ -53,26 +66,6 @@ const Market = () => {
           <Row>
             <Col lg="12" className="mb-5">
               <div className="market__product__filter d-flex align-items-center justify-content-between">
-                <div className="filter__left d-flex align-items-center gap-5">
-                  <div className="all__category__filter">
-                    <select onChange={handleCategory}>
-                      <option>All Categories</option>
-                      <option value="art">Art</option>
-                      <option value="music">Music</option>
-                      <option value="domain-name">Domain Name</option>
-                      <option value="virtual-world">Virtual World</option>
-                      <option value="trending-card">Trending Cards</option>
-                    </select>
-                  </div>
-
-                  <div className="all__items__filter">
-                    <select onChange={handleItems}>
-                      <option>All Items</option>
-                      <option value="single-item">Single Item</option>
-                      <option value="bundle">Bundle</option>
-                    </select>
-                  </div>
-                </div>
 
                 <div className="filter__right">
                   <select onChange={handleSort}>
@@ -84,10 +77,10 @@ const Market = () => {
                 </div>
               </div>
             </Col>
-
-            {data?.map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4" key={item.id}>
-                <NftCard item={item} />
+            
+            {tokens.map((item) => (
+              <Col lg="3" md="4" sm="6" className="mb-4" key={uuidv4()}>
+                <NftCard sale={sales[tokens.indexOf(item)]} token={item} near={{wallet, marketplaceContract, accountId}}/>
               </Col>
             ))}
           </Row>
@@ -98,3 +91,16 @@ const Market = () => {
 };
 
 export default Market;
+
+/*
+
+{tokens.map((item)=>{ return (<h1>{item.token_id}</h1>)}) }
+/*
+
+  const data = sales.map(sale =>
+    sale.reduce(
+      (result, field, index) => ({ ...result, [tokens[index]]: field }),
+      {}
+    )
+  )
+*/

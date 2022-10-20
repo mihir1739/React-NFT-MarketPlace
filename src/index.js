@@ -6,11 +6,23 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import "remixicon/fonts/remixicon.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+import { initContract} from './near/utils'
+
+window.nearInitPromise = initContract()
+    .then(({ nft_contract, marketplace_contract, accountId, nearConfig, walletConnection }) => {
+        ReactDOM.render(
+            <React.StrictMode>
+                <Router>
+                    <App
+                        nftContract={nft_contract}
+                        marketplaceContract={marketplace_contract}
+                        accountId={accountId}
+                        nearConfig={nearConfig}
+                        wallet={walletConnection}
+                    />,
+                </Router>
+            </React.StrictMode>,
+        document.getElementById('root')
+        );
+    }
 );

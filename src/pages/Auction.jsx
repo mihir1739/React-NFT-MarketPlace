@@ -1,48 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 
 import NftCard2 from "../components/ui/Nft-card2/NftCard2";
-
-import { NFT__DATA } from "../assets/data/data";
+import {getAuctions} from "../helper_functions/salehandler"
 
 import { Container, Row, Col } from "reactstrap";
 
 import "../styles/auction.css";
 
-const Auction = () => {
-  const [data, setData] = useState(NFT__DATA);
+const Auction = (props) => {
+  const {wallet, marketplaceContract, accountId} = props.mainObject;
 
-  const handleCategory = () => {};
+  const [auctions, setAuctions] = useState([]);
+  const [tokens, setTokens] = useState([]);
 
-  const handleItems = () => {};
-
-  // ====== SORTING DATA BY HIGH, MID, LOW RATE =========
-  const handleSort = (e) => {
-    const filterValue = e.target.value;
-
-    if (filterValue === "high") {
-      const filterData = NFT__DATA.filter((item) => item.currentBid >= 6);
-
-      setData(filterData);
+  useEffect( ()=>{
+    async function fetchObject(){
+      const object = await getAuctions(wallet, marketplaceContract);
+      setAuctions(object.auctions);
+      setTokens(object.tokens);
     }
+    fetchObject()
+  },[]);  
 
-    if (filterValue === "mid") {
-      const filterData = NFT__DATA.filter(
-        (item) => item.currentBid >= 5.5 && item.currentBid < 6
-      );
-
-      setData(filterData);
-    }
-
-    if (filterValue === "low") {
-      const filterData = NFT__DATA.filter(
-        (item) => item.currentBid >= 4.89 && item.currentBid < 5.5
-      );
-
-      setData(filterData);
-    }
-  };
+  // Something that can be done later
+  const handleSort = (e) =>{
+  }
 
   return (
     <>
@@ -53,27 +38,6 @@ const Auction = () => {
           <Row>
             <Col lg="12" className="mb-5">
               <div className="market__product__filter d-flex align-items-center justify-content-between">
-                <div className="filter__left d-flex align-items-center gap-5">
-                  <div className="all__category__filter">
-                    <select onChange={handleCategory}>
-                      <option>All Categories</option>
-                      <option value="art">Art</option>
-                      <option value="music">Music</option>
-                      <option value="domain-name">Domain Name</option>
-                      <option value="virtual-world">Virtual World</option>
-                      <option value="trending-card">Trending Cards</option>
-                    </select>
-                  </div>
-
-                  <div className="all__items__filter">
-                    <select onChange={handleItems}>
-                      <option>All Items</option>
-                      <option value="single-item">Single Item</option>
-                      <option value="bundle">Bundle</option>
-                    </select>
-                  </div>
-                </div>
-
                 <div className="filter__right">
                   <select onChange={handleSort}>
                     <option>Sort By</option>
@@ -84,12 +48,13 @@ const Auction = () => {
                 </div>
               </div>
             </Col>
-
-            {data?.map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4" key={item.id}>
-                <NftCard2 item={item} />
+            
+            {tokens.map((item) => (
+              <Col lg="3" md="4" sm="6" className="mb-4" key={uuidv4()}>
+                <NftCard2 auction={auctions[tokens.indexOf(item)]} token={item} near={{wallet, marketplaceContract, accountId}}/>
               </Col>
             ))}
+
           </Row>
         </Container>
       </section>

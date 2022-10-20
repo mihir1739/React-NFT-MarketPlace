@@ -3,12 +3,15 @@ import Routers from "../../routes/Routers";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-const Layout = () => {
+const Layout = (props) => {
+  
+  const {accountId} = props.mainObject;
+
   return (
     <div>
-      <Header />
+      <Header accountId={accountId}/>
       <div>
-        <Routers />
+        <Routers mainObject={props.mainObject}/>
       </div>
       <Footer />
     </div>

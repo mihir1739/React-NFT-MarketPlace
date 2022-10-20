@@ -1,0 +1,17 @@
+.input__item h6 {
+  font-size: 0.9rem;
+  color: rgb(32, 223, 42);
+}
+
+
+
+.input__item input {
+  width: 100%;
+  border: 1px solid rgba(221, 221, 221, 0.274);
+  background: transparent;
+  color: rgb(18, 218, 118);
+  padding: 9px 25px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 0.8rem;
+}

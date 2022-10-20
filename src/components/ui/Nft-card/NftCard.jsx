@@ -3,10 +3,24 @@ import { Link } from "react-router-dom";
 
 import "./nft-card.css";
 
+import {avas} from "../../../assets/data/data"
 import Modal from "../Modal/Modal";
 
 const NftCard = (props) => {
-  const { title, id, currentBid, creatorImg, imgUrl, creator } = props.item;
+  const { token_id, nft_contract_id, price, owner_id } =  props.sale;
+
+  const token = props.token;
+  const title = token.metadata.title;
+  const priceToDisplay = (price/(10**24)).toFixed(1);
+
+  let imgUrl = token.metadata.media;
+
+  if(token.base_uri){
+    imgUrl = token.base_uri + '/' + token.metadata.media;
+  }
+
+  const id = nft_contract_id + '/' + token_id;
+  const creatorImg = avas[Math.floor(Math.random() * 6)];
 
   const [showModal, setShowModal] = useState(false);
 
@@ -29,12 +43,11 @@ const NftCard = (props) => {
           <div className="creator__info w-100 d-flex align-items-center justify-content-between">
             <div>
               <h6>Created By</h6>
-              <p>{creator}</p>
+              <p>{owner_id}</p>
             </div>
-
             <div>
-              <h6>Current </h6>
-              <p>{currentBid} NEAR</p>
+              <h6>Price</h6>
+              <p>{priceToDisplay}</p>
             </div>
           </div>
         </div>
@@ -47,7 +60,7 @@ const NftCard = (props) => {
             <i className="ri-shopping-bag-line"></i> BUY NOW
           </button>
 
-          {showModal && <Modal setShowModal={setShowModal} />}
+          {showModal && <Modal setShowModal={setShowModal} nftProps={{price, priceToDisplay, sale : props.sale, title, imgUrl, near : props.near}}/>}
 
           <span className="history__link">
             {/* <Link to="#">View History</Link> */}

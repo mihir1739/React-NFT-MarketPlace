@@ -1,24 +1,71 @@
-import React from "react";
+import {useState} from "react";
 
 import { Container, Row, Col } from "reactstrap";
 import CommonSection from "../components/ui/Common-section/CommonSection";
-import NftCard from "../components/ui/Nft-card/NftCard";
-import img from "../assets/images/img-01.jpg";
-import avatar from "../assets/images/ava-01.png";
+import PreviewMint from "../components/ui/Preview-mint/PreviewMint";
+import placeholder from "../assets/images/placeholder.jpg";
+import Royalties from "../components/ui/Royalties/Royalties"
+import {mintListener, readURL} from '../helper_functions/mint.js'
 
 import "../styles/create-item.css";
 
-const item = {
-  id: "01",
-  title: "Guard",
-  desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
-  imgUrl: img,
-  creator: "Trista Francis",
-  creatorImg: avatar,
-  currentBid: 7.89,
-};
+const Create = (props) => {
 
-const Create = () => {
+  const {mainObject} = props;
+  const creator = mainObject.accountId;
+
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [src, setSrc] = useState(placeholder);
+  const [buffer, setBuffer] = useState(0);
+  const [royalties, setRoyalties] = useState([]);
+
+  const updateRoyalty = (object) =>{
+    setRoyalties(royalties.map(item=>{
+      if (item.listId === object.listId){
+        return {
+          listId: object.listId,
+          account: object.account, 
+          percentage: parseInt(object.percentage) * 100
+        }
+      }
+      else{
+        return item;
+      }
+    }))
+  }
+
+  const deleteRoyalty = (listId) =>{
+    setRoyalties(
+      royalties.filter(item =>{
+        return item.listId !== listId
+      })
+    )
+  }
+
+  const addRoyalty = (listId) =>{
+    setRoyalties([
+      ...royalties,
+      {
+        listId,
+        account:'',
+        percentage:0
+      }
+    ])
+  }
+
+  const formHandler = (e) =>{
+    e.preventDefault();
+    
+    const {wallet, nft_contract, accountId} = props.mainObject;
+
+    const signedIn = wallet.isSignedIn();
+
+    mintListener(title, desc, buffer, royalties, signedIn, nft_contract, accountId)
+  }
+
+
+
   return (
     <>
       <CommonSection title="Create Item" />
@@ -28,45 +75,19 @@ const Create = () => {
           <Row>
             <Col lg="3" md="4" sm="6">
               <h5 className="mb-4 text-light">Preview Item</h5>
-              <NftCard item={item} />
+              <PreviewMint item={{title, desc, src, creator}} />
             </Col>
 
             <Col lg="9" md="8" sm="6">
               <div className="create__item">
-                <form>
+                <form onSubmit={formHandler}>
                   <div className="form__input">
                     <label htmlFor="">Upload File</label>
-                    <input type="file" className="upload__input" />
+                    <input type="file" className="upload__input" onChange={(e)=>readURL(e, setSrc, setBuffer)} required/>
                   </div>
-
-                  <div className="form__input">
-                    <label htmlFor="">Price</label>
-                    <input
-                      type="number"
-                      placeholder="Enter price for one item (NEAR)"
-                    />
-                  </div>
-
-                  <div className="form__input">
-                    <label htmlFor="">Minimum Bid</label>
-                    <input type="number" placeholder="Enter minimum bid" />
-                  </div>
-
-                  <div className=" d-flex align-items-center gap-4">
-                    <div className="form__input w-50">
-                      <label htmlFor="">Starting Date</label>
-                      <input type="date" />
-                    </div>
-
-                    <div className="form__input w-50">
-                      <label htmlFor="">Expiration Date</label>
-                      <input type="date" />
-                    </div>
-                  </div>
-
                   <div className="form__input">
                     <label htmlFor="">Title</label>
-                    <input type="text" placeholder="Enter title" />
+                    <input type="text" placeholder="Enter title" onChange={(e)=> setTitle(e.target.value)} required/>
                   </div>
 
                   <div className="form__input">
@@ -77,8 +98,21 @@ const Create = () => {
                       rows="7"
                       placeholder="Enter description"
                       className="w-100"
+                      onChange={ (e)=> setDesc(e.target.value)}
+                      required
                     ></textarea>
                   </div>
+
+                  <div className="form__input">
+                    <Royalties add={addRoyalty} update={updateRoyalty} delete={deleteRoyalty}/>
+                  </div>
+                  <button
+                    className="bid__btn d-flex align-items-center gap-1"
+                    type="submit"
+                    >
+                    <i className="ri-shopping-bag-line"></i> MINT NOW
+                  </button>
+
                 </form>
               </div>
             </Col>

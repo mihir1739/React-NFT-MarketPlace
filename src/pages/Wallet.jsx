@@ -2,6 +2,7 @@ import React from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { Container, Row, Col } from "reactstrap";
+import { v4 as uuidv4 } from 'uuid';
 
 import "../styles/wallet.css";
 
@@ -20,7 +21,7 @@ const wallet__data = [
 
   {
     title: "Near Wallet",
-    desc: "Best software cryptowallet that allows you to store both NFTs and as well as Crypto currencies. Provides security to your asset!!",
+    desc: "Currently supported wallet which stores your assets",
     icon: "ri-coin-line",
   },
 
@@ -31,32 +32,27 @@ const wallet__data = [
   // },
 ];
 
-const Wallet = () => {
+const Wallet = (props) => {
+
+  const {signIn, signOut, wallet, accountId} = props.mainObject;
+
+  const state = wallet.isSignedIn();
+
   return (
     <>
       <CommonSection title="Connect Wallet" />
       <section>
         <Container>
           <Row>
-            <Col lg="12" className="mb-5 text-center">
-              <div className="w-50 m-auto">
-                <h3 className="text-light">Connect your wallet</h3>
-                <p>
-                  Ignitus suggest's you the best crypto wallets in the market. 
-                  Wallets provides best security to all your assets and also allows you 
-                  to store you NFTs or Tokens safe with a keys!
-                </p>
-              </div>
-            </Col>
-
             {wallet__data.map((item, index) => (
-              <Col lg="12" md="6" sm="4" key={index} className="mb-6">
-                <div className="wallet__item">
+              <Col lg="12" md="6" sm="4" key={uuidv4()} className="mb-6">
+                <div className="wallet__item" onClick={state ? signOut : signIn}>
                   <span>
-                    <i class={item.icon}></i>
+                    <i className={item.icon}></i>
                   </span>
                   <h5>{item.title}</h5>
                   <p>{item.desc}</p>
+                  <p>{state ? "You are logged in as " + accountId + ", click to log out" : "You are logged out, click to log in"}</p>
                 </div>
               </Col>
             ))}

@@ -15,6 +15,8 @@ import ava04 from "../images/ava-04.png";
 import ava05 from "../images/ava-05.png";
 import ava06 from "../images/ava-06.png";
 
+export const avas = [ava01, ava02, ava03, ava04, ava05, ava06];
+
 export const NFT__DATA = [
   {
     id: "01",
