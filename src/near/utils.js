@@ -47,3 +47,74 @@ export async function checkAccount(accountId){
   
   return true;
 }
+
+export async function checkStandard(accountId){
+  const near = await connect(Object.assign({ deps: {} }, nearConfig));
+  const contract = await new Contract(window.walletConnection.account(), accountId, {
+    viewMethods : ['nft_metadata'],
+  });
+
+  try{
+    const metadata = await contract.nft_metadata();
+  }
+  catch(e){
+    return false;
+  }
+  
+  return true;
+}
+
+export function clearContentBody(){
+  let content=document.getElementById("content");
+
+  let essential=["header", "footer"]
+  let toBeDeleted=[];
+
+  for(let i=0; i<content.childNodes.length; i++){
+    if (!essential.includes(content.childNodes[i].id))
+      toBeDeleted.push(content.childNodes[i])
+  }
+
+  for(let i=0; i<toBeDeleted.length; i++)
+    content.removeChild(toBeDeleted[i])
+}
+
+export function provokeLogin(container, msg){
+  let state=window.walletConnection.isSignedIn();
+
+  if(!state){
+    let warning_message=document.createElement("div");
+    warning_message.id='provoke_login'
+    warning_message.textContent=msg;
+    container.prepend(warning_message);
+  }
+}
+
+export function createModal(width, height, modalId){
+  let container=document.createElement("div");
+  container.classList.add('modal_bg')
+
+  let modal=document.createElement("div")
+  modal.classList.add("modal");
+  modal.id=modalId;
+  modal.style.height=height;
+  modal.style.width=width;
+
+  container.appendChild(modal);
+  return {container,modal}
+}
+
+export async function getContract(set, contract_objects, contract) {
+  if (set.has(contract)){
+    return contract_objects[contract]
+  }
+  else{
+    set.add(contract);
+    contract_objects[contract] = await new Contract(window.walletConnection.account(), contract, {
+        viewMethods: ['nft_metadata', 'nft_total_supply', 'nft_tokens_for_owner', 'nft_token'],
+        changeMethods: ['nft_mint', 'nft_transfer', 'nft_approve', 'nft_revoke'],
+    })
+
+    return contract_objects[contract]
+  }
+}
