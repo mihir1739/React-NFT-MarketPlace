@@ -1,5 +1,12 @@
 const nft_contract = 'dev-1654158872994-43526873072091' //''dev-1653362742618-42287399483761' //'dev-1652185815615-38783641891685' //'royalties.evin.testnet' //'dev-1646240406152-71422260461975'
-
+const contracts = [
+  "dev-1654679960818-32346456826161",
+  "dev-1654158872994-43526873072091",
+  "dev-1653362742618-42287399483761",
+  "dev-1652185815615-38783641891685",
+  "royalties.evin.testnet",
+  "dev-1646240406152-71422260461975",
+];
 const marketplace_contract= 'dev-1653811534834-97919957626619' //'dev-1653363544091-47600905380994' //'dev-1652450363200-32566891032927' //'dev-1651817325992-49412045689708' //'auction_market.evin.testnet' 
 
 
@@ -12,6 +19,7 @@ function getConfig(env) {
       networkId: 'mainnet',
       nodeUrl: 'https://rpc.mainnet.near.org',
       nftContract: nft_contract,
+      contract: contracts,
       marketplaceContract: marketplace_contract,
       walletUrl: 'https://wallet.near.org',
       helperUrl: 'https://helper.mainnet.near.org',
