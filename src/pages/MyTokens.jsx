@@ -36,6 +36,10 @@ function Mytokens(props) {
 
   }
 
+  function checkIPFSHash(hash) {
+    return hash.startsWith("Qm");
+  }
+
   async function query() {
     const jsonData = [];
     let contracts = [
@@ -85,6 +89,14 @@ function Mytokens(props) {
     });
   }
 
+  function getImg(url) {
+    if (checkIPFSHash(url)) {
+      return `https://gateway.pinata.cloud/ipfs/${url}`;
+    } else {
+      return url
+    }
+  }
+
   return (
     <>
       <CommonSection title="Select collection for viewing your tokens" />
@@ -120,7 +132,7 @@ function Mytokens(props) {
               return (
                 <img
                   style={{ width: "10vw" }}
-                  src={nft.metadata.media}
+                  src={getImg(nft.metadata.media)}                  
                   alt=""
                   key={key}
                 />
