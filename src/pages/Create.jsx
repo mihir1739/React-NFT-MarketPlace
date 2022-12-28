@@ -10,7 +10,7 @@ import { Button } from "react-bootstrap";
 import { initContract } from "../near/utils";
 
 const jwt =
-  "Bearer + Your JWT Token";
+  "Bearer + 91722bdb234224ff0cf4";
 
 const Create = (props) => {
   const { mainObject } = props;
