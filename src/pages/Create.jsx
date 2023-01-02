@@ -10,7 +10,7 @@ import { Button } from "react-bootstrap";
 import { initContract } from "../near/utils";
 
 const jwt =
-  "Bearer + 91722bdb234224ff0cf4";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI3OWUyYWJjOS02NmEyLTQ5MjYtYTIxMS04YjJmMDA3MzIyMTQiLCJlbWFpbCI6ImRpdnllc2hsYWx3YW5pMTNAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJGUkExIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9LHsiaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjY0MWE5MGZlMjI2NWRiNzYwZDE3Iiwic2NvcGVkS2V5U2VjcmV0IjoiYzgyN2FhOTM4MmMwZTg3MTBiMjg1NTc0ZDg1Yjc5N2M0MDhmMjhjYTc4OGViNDE3MWQzNDg2Y2UzOTdkZmI2OSIsImlhdCI6MTY3MjQwNTg4OX0.Ly1YIV9PvIuiVFZqtHg27f3KbisVJ1FnLL7Ujfadof8";
 
 const Create = (props) => {
   const { mainObject } = props;
@@ -21,13 +21,14 @@ const Create = (props) => {
   const [src, setSrc] = useState(placeholder);
   const [buffer, setBuffer] = useState(0);
   const [selectedFile, setselectedFile] = useState();
-  const [tokenID, settokenID] = useState()
+  const [tokenID, settokenID] = useState();
 
-  async function mintNFT() {
+  async function mintNFT(e) {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("file", selectedFile);
     const metadata = JSON.stringify({
-      name: "File name",
+      name: "test",
     });
     formData.append("pinataMetadata", metadata);
     const options = JSON.stringify({
@@ -87,10 +88,9 @@ const Create = (props) => {
     }
   }
 
-  // console.log(selectedFile);
   function handleChange(e) {
     setselectedFile(e.target.files[0]);
-    // readURL(e, setSrc, setBuffer);
+    readURL(e, setSrc, setBuffer);
   }
 
   return (
@@ -149,7 +149,9 @@ const Create = (props) => {
                     </div>
                   </div>
                   {/* <Button onClick={uploadIPFS}>Upload to IPFS</Button> */}
-                  <Button type="submit" onClick={mintNFT}>Mint</Button>
+                  <Button type="submit" onClick={(e) => mintNFT(e)}>
+                    Mint
+                  </Button>
                 </form>
               </div>
             </Col>
