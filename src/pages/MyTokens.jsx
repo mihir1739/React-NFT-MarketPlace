@@ -42,7 +42,7 @@ function Mytokens() {
         from_index: "0",
         limit: 20,
       });
-      setnftMetadatas([...nfts]);
+      setnftMetadatas([...nftMetadatas, ...nfts]);
     } catch {
       alert("Invalid address!");
     }
