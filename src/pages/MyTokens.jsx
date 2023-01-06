@@ -38,7 +38,7 @@ function Mytokens() {
       );
 
       const nfts = await contract.nft_tokens_for_owner({
-        account_id: "snair2001.testnet",
+        account_id: helpers.accountId,
         from_index: "0",
         limit: 20,
       });
