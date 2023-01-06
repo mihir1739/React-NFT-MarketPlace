@@ -42,7 +42,6 @@ function Mytokens() {
         from_index: "0",
         limit: 20,
       });
-      console.log(nfts);
       setnftMetadatas([...nftMetadatas, ...nfts]);
     } catch {
       alert("Invalid address!");
@@ -88,7 +87,6 @@ function Mytokens() {
         <div style={{ display: "flex", justifyContent: "flex-start" }}>
           {nftMetadatas.length > 0 ? (
             nftMetadatas.map((nft, key) => {
-              {console.log(nft);}
               return (
                 <div
                   style={{
@@ -104,7 +102,10 @@ function Mytokens() {
                     key={key}
                   />
                   <h6 style={{ color: "white", wordWrap: "break-word" }}>
-                    #<span style={{color : "GrayText", margin : "0.2rem"}}>{nft.token_id.toUpperCase()}</span>
+                    #
+                    <span style={{ color: "GrayText", margin: "0.2rem" }}>
+                      {nft.token_id.toUpperCase()}
+                    </span>
                   </h6>
                 </div>
               );
