@@ -21,7 +21,6 @@ const Create = (props) => {
   const [src, setSrc] = useState(placeholder);
   const [buffer, setBuffer] = useState(0);
   const [selectedFile, setselectedFile] = useState();
-  const [tokenID, settokenID] = useState();
 
   async function mintNFT(e) {
     e.preventDefault();
@@ -59,11 +58,15 @@ const Create = (props) => {
   }
 
   async function mint(ipfsHash) {
+    const id = Math.round(new Date().getTime() / 1000)
+      .toString()
+      .slice(2);
     const helpers = await initContract();
+    console.log(id);
     try {
       const res = await helpers.nft_contract.nft_mint(
         {
-          token_id: tokenID,
+          token_id: id,
           metadata: {
             title: title,
             description: desc,
@@ -115,16 +118,6 @@ const Create = (props) => {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-
-                    <div className="form__input">
-                      <label htmlFor="">Token ID</label>
-                      <input
-                        type="text"
-                        placeholder="Enter desired token ID"
-                        onChange={(e) => settokenID(e.target.value)}
-                        required
-                      />
-                    </div>
 
                     <div className="form__input">
                       <label htmlFor="">Title</label>

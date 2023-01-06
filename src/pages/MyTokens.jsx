@@ -38,10 +38,11 @@ function Mytokens() {
       );
 
       const nfts = await contract.nft_tokens_for_owner({
-        account_id: helpers.accountId,
+        account_id: "snair2001.testnet",
         from_index: "0",
         limit: 20,
       });
+      console.log(nfts);
       setnftMetadatas([...nftMetadatas, ...nfts]);
     } catch {
       alert("Invalid address!");
@@ -84,16 +85,28 @@ function Mytokens() {
         <h2 style={{ textAlign: "center" }}>
           Found "{nftMetadatas.length}" NFTs in your wallet:
         </h2>
-        <div className="container mx-auto mt-3">
+        <div style={{ display: "flex", justifyContent: "flex-start" }}>
           {nftMetadatas.length > 0 ? (
             nftMetadatas.map((nft, key) => {
+              {console.log(nft);}
               return (
-                <img
-                  style={{ width: "10vw" }}
-                  src={getImg(nft.metadata.media)}
-                  alt=""
-                  key={key}
-                />
+                <div
+                  style={{
+                    backgroundColor: "rgba(0, 0, 255, 0.219)",
+                    width: "15vw",
+                    margin: "1rem",
+                  }}
+                >
+                  <img
+                    style={{ width: "80%", margin: "0.5rem" }}
+                    src={getImg(nft.metadata.media)}
+                    alt=""
+                    key={key}
+                  />
+                  <h6 style={{ color: "white", wordWrap: "break-word" }}>
+                    #<span style={{color : "GrayText", margin : "0.2rem"}}>{nft.token_id.toUpperCase()}</span>
+                  </h6>
+                </div>
               );
             })
           ) : (
